@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "preserveWatchOutput": true,
+
+    "module": "node16",
+    "target": "ES2020",
+    "lib": ["esnext"],
+    "moduleResolution": "node16",
+
+    "outDir": "./build",
+  },
+  "include": ["src/**/*.ts"]
+}
