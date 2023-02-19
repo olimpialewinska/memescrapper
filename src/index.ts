@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import { extractedData } from "./scrapper.js";
+import { extractData } from "./scrapper.js";
 import { db } from "./firebase.js";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 
@@ -34,12 +34,22 @@ app.get("/", async (req: Request, res: Response) => {
   res.send(images);
 });
 
+app.get("/:number?", async (req: Request, res: Response) => {
+  const number = req.params.number;
+  if (number) {
+    const newImages = images.slice(parseInt(number), parseInt(number)+10);
+    res.send(newImages);
+  } else {
+    res.send(images);
+  }
+});
+
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
 
 const cacheImages = async () => {
-  const newImages = await extractedData("https://funnyjunk.com/");
+  const newImages = await extractData("https://funnyjunk.com/");
   newImages.forEach((image) => {
     if (!images.find(x => x.imageUrl === image)) {
       const data: Image = {

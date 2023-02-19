@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { load } from "cheerio";
+import { writeFileSync } from "fs";
 
 function scrapper(url: string): Promise<string> {
   const HTMLData = axios
@@ -13,15 +14,15 @@ function scrapper(url: string): Promise<string> {
   return HTMLData;
 }
 
-async function extractedData(url: string) {
+async function extractData(url: string) {
   const HTMLData = await scrapper(url);
   const $ = load(HTMLData);
   const imageSources: string[] = [];
-  $('img').each((index, element) => {
+  $('.mobCon.med img').each((index, element) => {
     const imageURL = $(element).attr('data-original');
     imageSources.push(imageURL? imageURL : '');
   });
   return imageSources;
 }
 
-export { extractedData };
+export { extractData };
