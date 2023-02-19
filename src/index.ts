@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { extractData } from "./scrapper.js";
-import { db } from "./firebase.js";
+//import { db } from "./firebase.js";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 
 
@@ -56,8 +56,8 @@ const cacheImages = async () => {
         imageUrl: image,
         date: Date.now(),
       }
-      addDoc(collection(db, "Meme"), data);
-      images.push(data);
+      //addDoc(collection(db, "Meme"), data);
+      //images.push(data);
     }
   });
 };
